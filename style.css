@@ -1,10 +1,11 @@
 :root {
-    --bg-color: #f0f2f5;
-    --text-color: #1f2937;
-    --card-bg: rgba(255, 255, 255, 0.9);
-    --phone-gradient: linear-gradient(135deg, #0f766e, #14b8a6); /* Teal/Green */
-    --kitchen-gradient: linear-gradient(135deg, #1e40af, #3b82f6); /* Deep Blue */
-    --font-family: 'Noto Sans TC', sans-serif;
+    --bg-color: #000000;
+    --text-color: #ffffff;
+    --text-secondary: #a1a1aa;
+    --card-bg: rgba(23, 23, 23, 0.6);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --accent-glow: rgba(255, 255, 255, 0.2);
+    --font-family: 'Noto Sans TC', system-ui, -apple-system, sans-serif;
 }
 
 * {
@@ -22,92 +23,103 @@ body {
     justify-content: center;
     align-items: center;
     padding: 20px;
-    background: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 100%);
+    overflow-x: hidden;
+    /* Prevent scroll from animation */
 }
 
 .container {
     width: 100%;
-    max-width: 480px;
+    max-width: 520px;
+    /* Slightly wider for modern feel */
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 40px;
+    position: relative;
+    z-index: 1;
+    /* Ensure content is above canvas */
 }
 
 header {
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 header h1 {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #111827;
+    font-size: 2.5rem;
+    font-weight: 500;
     margin-bottom: 0.5rem;
-    letter-spacing: -0.025em;
+    letter-spacing: 0.05em;
+    /* Tesla-like spacing */
+    background: linear-gradient(to right, #ffffff, #a1a1aa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 header p {
-    color: #6b7280;
-    font-size: 1rem;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    font-weight: 300;
 }
 
 main {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 24px;
 }
 
 .card {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 24px;
-    background: white;
-    border-radius: 20px;
+    padding: 32px;
+    background: var(--card-bg);
+    border-radius: 4px;
+    /* Sharper corners for Tesla feel */
     text-decoration: none;
     color: inherit;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-    transition: all 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--card-border);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
 }
 
+/* Subtle glow on hover */
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
 .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    transform: translateY(-2px);
+    background: rgba(30, 30, 30, 0.8);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
 }
 
-/* Phone Card Specifics */
-.phone-card .card-icon {
-    background: #e6fffa;
-    color: #0d9488;
-}
-
-.phone-card:hover {
-    border-color: #14b8a6;
-}
-
-/* Kitchen Card Specifics */
-.kitchen-card .card-icon {
-    background: #eff6ff;
-    color: #2563eb;
-}
-
-.kitchen-card:hover {
-    border-color: #3b82f6;
+.card:hover::before {
+    opacity: 1;
 }
 
 .card-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 16px;
+    width: 64px;
+    height: 64px;
+    /* Removed background for cleaner look */
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 32px;
+    font-size: 36px;
     flex-shrink: 0;
-    margin-right: 20px;
+    margin-right: 24px;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
 }
 
 .card-content {
@@ -115,64 +127,64 @@ main {
 }
 
 .card-content h2 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 6px;
-    color: #374151;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #ffffff;
+    letter-spacing: 0.02em;
 }
 
 .description {
-    font-size: 0.875rem;
-    color: #6b7280;
-    margin-bottom: 12px;
+    font-size: 0.95rem;
+    color: #d1d5db;
+    margin-bottom: 16px;
+    font-weight: 300;
 }
 
 .tags {
     display: flex;
-    gap: 8px;
+    gap: 10px;
     flex-wrap: wrap;
 }
 
 .tags span {
     font-size: 0.75rem;
-    padding: 4px 8px;
-    border-radius: 6px;
-    background-color: #f3f4f6;
-    color: #4b5563;
-    font-weight: 500;
+    padding: 4px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 100px;
+    color: #e5e7eb;
+    background: transparent;
+    font-weight: 400;
+    letter-spacing: 0.03em;
 }
 
 .card-arrow {
     font-size: 1.5rem;
-    color: #9ca3af;
-    margin-left: 16px;
-    transition: transform 0.3s ease;
+    color: #6b7280;
+    margin-left: 20px;
+    transition: all 0.3s ease;
 }
 
 .card:hover .card-arrow {
-    transform: translateX(4px);
-    color: #4b5563;
+    transform: translateX(5px);
+    color: #ffffff;
 }
 
 footer {
     text-align: center;
     margin-top: 20px;
-    font-size: 0.75rem;
-    color: #9ca3af;
+    font-size: 0.8rem;
+    color: #525252;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
 }
 
 @media (max-width: 480px) {
     body {
         padding: 16px;
     }
-    
+
     .card {
-        padding: 20px;
-    }
-    
-    .card-icon {
-        width: 50px;
-        height: 50px;
-        font-size: 24px;
+        padding: 24px;
     }
 }

@@ -48,10 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
         constructor() {
             this.x = Math.random() * width;
             this.y = Math.random() * height;
-            this.vx = (Math.random() - 0.5) * 1.5; // Velocity X
-            this.vy = (Math.random() - 0.5) * 1.5; // Velocity Y
-            this.size = Math.random() * 2 + 1;
-            this.color = 'rgba(59, 130, 246, 0.5)'; // Blue-ish
+            this.vx = (Math.random() - 0.5) * 1; // Slower velocity for elegance
+            this.vy = (Math.random() - 0.5) * 1;
+            this.size = Math.random() * 1.5 + 0.5; // Smaller, finer particles
+            this.color = 'rgba(255, 255, 255, 0.4)'; // White transparency for dark mode
         }
 
         update() {
@@ -117,8 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (distance < connectionDistance) {
                     let opacity = 1 - (distance / connectionDistance);
-                    ctx.strokeStyle = `rgba(59, 130, 246, ${opacity * 0.4})`; // Light blue lines
-                    ctx.lineWidth = 1;
+                    ctx.strokeStyle = `rgba(165, 243, 252, ${opacity * 0.2})`; // Cyan twist (Tailwind cvan-200), faint
+                    ctx.lineWidth = 0.5;
                     ctx.beginPath();
                     ctx.moveTo(particles[a].x, particles[a].y);
                     ctx.lineTo(particles[b].x, particles[b].y);
